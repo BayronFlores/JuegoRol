@@ -11,7 +11,7 @@ class Personaje:
         raise NotImplementedError()
 
     def ataqueAcerto(self):
-        return random.random() < 0.5
+        return random.random() < 0.5 #genera un número aleatorio y devuelve True si el número es menor que 0.5.
 "---------------------------------------------------------------------------------------------"
 class Enemigo:
     def __init__(self, nombre):
@@ -24,7 +24,7 @@ class Enemigo:
             print(f"{self.nombre} ataca a {personaje.nombre} y logra hacerle daño.")
 
     def defender(self):
-        return random.random() < 0.5
+        return random.random() < 0.5 #genera un número aleatorio y devuelve True si el número es menor que 0.5.
 
 "---------------------------------------------------------------------------------------------"
 class Guerrero(Personaje):
