@@ -1,8 +1,8 @@
 import random
 
 class Personaje: #constructor 
-    def __init__(self, nombre):
-        self.nombre = nombre
+    def __init__(self, name):
+        self.name = name
 
     def atacar(self):
         raise NotImplementedError() #indica que la clase derivada no implementa intencionalmente un método abstracto de clase
@@ -14,14 +14,14 @@ class Personaje: #constructor
         return random.random() < 0.5 #genera un número aleatorio y devuelve True si el número es menor que 0.5.
 "-----------------------------------------------------------------------------------------------------------------"
 class Enemigo: #constructor 
-    def __init__(self, nombre):
-        self.nombre = nombre
+    def __init__(self, name):
+        self.name = name
 
     def atacar(self, personaje):
         if personaje.defender():
-            print(f"{self.nombre} ataca a {personaje.nombre}, pero {personaje.nombre} se defiende exitosamente.")
+            print(f"{self.name} ataca a {personaje.name}, pero {personaje.name} se defiende exitosamente.")
         else:
-            print(f"{self.nombre} ataca a {personaje.nombre} y logra hacerle daño.")
+            print(f"{self.name} ataca a {personaje.name} y logra hacerle daño.")
 
     def defender(self):
         return random.random() < 0.5 #genera un número aleatorio y devuelve True si el número es menor que 0.5.
@@ -29,80 +29,82 @@ class Enemigo: #constructor
 class Guerrero(Personaje): #se heredan los atributos de "Personaje"
     def atacar(self):
         if self.ataqueAcerto():
-            print(f"{self.nombre} realiza un ataque con su espada y acierta.")
+            print(f"{self.name} realiza un ataque con su espada y acierta.")
         else:
-            print(f"{self.nombre} realiza un ataque con su espada, pero falla.")
+            print(f"{self.name} realiza un ataque con su espada, pero falla.")
 
     def defender(self):
         if self.ataqueAcerto():
-            print(f"{self.nombre} bloquea el ataque con su escudo.")
+            print(f"{self.name} bloquea el ataque con su escudo.")
             return True
         else:
-            print(f"{self.nombre} no logra bloquear el ataque y recibe daño.")
+            print(f"{self.name} no logra bloquear el ataque y recibe daño.")
             return False
 "-----------------------------------------------------------------------------------------------------------------"
 class Arquero(Personaje): #se heredan los atributos de "Personaje"
     def atacar(self):
         if self.ataqueAcerto():
-            print(f"{self.nombre} dispara una flecha hacia su enemigo y acierta.")
+            print(f"{self.name} dispara una flecha hacia su enemigo y acierta.")
         else:
-            print(f"{self.nombre} dispara una flecha hacia su enemigo, pero falla.")
+            print(f"{self.name} dispara una flecha hacia su enemigo, pero falla.")
 
     def defender(self):
         if self.ataqueAcerto():
-            print(f"{self.nombre} se mueve rápidamente para esquivar el ataque.")
+            print(f"{self.name} se mueve rápidamente para esquivar el ataque.")
             return True
         else:
-            print(f"{self.nombre} no logra bloquear el ataque y recibe daño.")
+            print(f"{self.name} no logra bloquear el ataque y recibe daño.")
             return False
 "-----------------------------------------------------------------------------------------------------------------"
 class Mago(Personaje): #se heredan los atributos de "Personaje"
     def atacar(self):
         if self.ataqueAcerto():
-            print(f"{self.nombre} lanza una bola de fuego a su enemigo y acierta.")
+            print(f"{self.name} lanza una bola de fuego a su enemigo y acierta.")
         else:
-            print(f"{self.nombre} lanza una bola de fuego a su enemigo, pero falla.")
+            print(f"{self.name} lanza una bola de fuego a su enemigo, pero falla.")
 
     def defender(self):
         if self.ataqueAcerto():
-            print(f"{self.nombre} crea un escudo mágico para protegerse.")
+            print(f"{self.name} crea un escudo mágico para protegerse.")
             return True
         else:
-            print(f"{self.nombre} no logra bloquear el ataque y recibe daño.")
+            print(f"{self.name} no logra bloquear el ataque y recibe daño.")
             return False
 "-----------------------------------------------------------------------------------------------------------------"
 
 class CrearPersonajes:
-    def crear_personaje(self, tipo, nombre):
+    def crear_personaje(self, tipo, name):
         if tipo == "guerrero":
-            return Guerrero(nombre)
+            return Guerrero(name)
         elif tipo == "arquero":
-            return Arquero(nombre)
+            return Arquero(name)
         elif tipo == "mago":
-            return Mago(nombre)
+            return Mago(name)
         else:
             raise ValueError(f"Tipo de personaje desconocido: {tipo}")
 "-----------------------------------------------------------------------------------------------------------------"
-creador = CrearPersonajes()
+crear = CrearPersonajes()
 
-continuar_juego = True
-while continuar_juego:
+continuarJuego = True
+while continuarJuego:
     tipo_personaje = ""
     while tipo_personaje not in ["guerrero", "mago", "arquero"]:
         tipo_personaje = input("Selecciona el tipo de personaje (guerrero, mago, arquero): ")
         if tipo_personaje not in ["guerrero", "mago", "arquero"]:
             print(f"Tipo de personaje desconocido: {tipo_personaje}")
 
-    nombre_personaje = input("Ingresa el nombre del personaje: ")
+    nombrePersonaje = input("Ingresa el nombre del personaje: ")
 
     print("-------------------------------------------")
 
-    personaje = creador.crear_personaje(tipo_personaje, nombre_personaje)
+    personaje = crear.crear_personaje(tipo_personaje, nombrePersonaje)
     personaje.atacar()
 
     enemigo = Enemigo("Orco")
     enemigo.atacar(personaje)
 
+    print("-------------------------------------------")
+
     respuesta = input("¿Deseas utilizar otro personaje? (s/n): ")
     if respuesta.lower() != "s":
-        continuar_juego = False
+        continuarJuego = False
