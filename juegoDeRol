@@ -71,7 +71,6 @@ class Mago(Personaje):  #se heredan los atributos de "Personaje"
             print(f"{self.name} no logra bloquear el ataque y recibe daño.")
             return False
 "-----------------------------------------------------------------------------------------------------------------"
-
 class CrearPersonajes:
     def crear_personaje(self, tipo, name):
         if tipo == "guerrero":
