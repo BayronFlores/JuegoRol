@@ -12,7 +12,7 @@ class Personaje:
 
     def ataqueAcerto(self):
         return random.random() < 0.5 #genera un número aleatorio y devuelve True si el número es menor que 0.5.
-"---------------------------------------------------------------------------------------------"
+"-----------------------------------------------------------------------------------------------------------------"
 class Enemigo:
     def __init__(self, nombre):
         self.nombre = nombre
@@ -25,14 +25,13 @@ class Enemigo:
 
     def defender(self):
         return random.random() < 0.5 #genera un número aleatorio y devuelve True si el número es menor que 0.5.
-
-"---------------------------------------------------------------------------------------------"
+"-----------------------------------------------------------------------------------------------------------------"
 class Guerrero(Personaje):
     def atacar(self):
         if self.ataqueAcerto():
-            print(f"{self.nombre} realiza un poderoso ataque con su espada y acierta.")
+            print(f"{self.nombre} realiza un ataque con su espada y acierta.")
         else:
-            print(f"{self.nombre} realiza un poderoso ataque con su espada, pero falla.")
+            print(f"{self.nombre} realiza un ataque con su espada, pero falla.")
 
     def defender(self):
         if self.ataqueAcerto():
@@ -41,13 +40,13 @@ class Guerrero(Personaje):
         else:
             print(f"{self.nombre} no logra bloquear el ataque y recibe daño.")
             return False
-"---------------------------------------------------------------------------------------------"
+"-----------------------------------------------------------------------------------------------------------------"
 class Mago(Personaje):
     def atacar(self):
         if self.ataqueAcerto():
-            print(f"{self.nombre} lanza una bola de fuego a sus enemigos y acierta.")
+            print(f"{self.nombre} lanza una bola de fuego a su enemigo y acierta.")
         else:
-            print(f"{self.nombre} lanza una bola de fuego a sus enemigos, pero falla.")
+            print(f"{self.nombre} lanza una bola de fuego a su enemigo, pero falla.")
 
     def defender(self):
         if self.ataqueAcerto():
@@ -56,13 +55,13 @@ class Mago(Personaje):
         else:
             print(f"{self.nombre} no logra bloquear el ataque y recibe daño.")
             return False
-"---------------------------------------------------------------------------------------------"
+"-----------------------------------------------------------------------------------------------------------------"
 class Arquero(Personaje):
     def atacar(self):
         if self.ataqueAcerto():
-            print(f"{self.nombre} dispara una flecha hacia sus enemigos y acierta.")
+            print(f"{self.nombre} dispara una flecha hacia su enemigo y acierta.")
         else:
-            print(f"{self.nombre} dispara una flecha hacia sus enemigos, pero falla.")
+            print(f"{self.nombre} dispara una flecha hacia su enemigo, pero falla.")
 
     def defender(self):
         if self.ataqueAcerto():
@@ -71,7 +70,7 @@ class Arquero(Personaje):
         else:
             print(f"{self.nombre} no logra bloquear el ataque y recibe daño.")
             return False
-"---------------------------------------------------------------------------------------------"
+"-----------------------------------------------------------------------------------------------------------------"
 class CrearPersonajes:
     def crear_personaje(self, tipo, nombre):
         if tipo == "guerrero":
@@ -82,27 +81,19 @@ class CrearPersonajes:
             return Arquero(nombre)
         else:
             raise ValueError(f"Tipo de personaje desconocido: {tipo}")
-"---------------------------------------------------------------------------------------------"
+"-----------------------------------------------------------------------------------------------------------------"
 creador = CrearPersonajes()
 
-personaje1 = creador.crear_personaje("guerrero", "Aragorn")
-personaje1.atacar()
+tipo_personaje = ""
+while tipo_personaje not in ["guerrero", "mago", "arquero"]: #solicitar la entrada hasta que se proporcione un valor válido
+    tipo_personaje = input("Selecciona el tipo de personaje (guerrero, mago, arquero): ")
 
-enemigo1 = Enemigo("Orco")
-enemigo1.atacar(personaje1)
+nombre_personaje = input("Ingresa el nombre del personaje: ")
 
-print("----------------------------------------------------------")
 
-personaje2 = creador.crear_personaje("mago", "Gandalf")
-personaje2.atacar()
 
-enemigo2 = Enemigo("Dragon")
-enemigo2.atacar(personaje2)
+personaje = creador.crear_personaje(tipo_personaje, nombre_personaje)
+personaje.atacar()
 
-print("----------------------------------------------------------")
-
-personaje3 = creador.crear_personaje("arquero", "Legolas")
-personaje3.atacar()
-
-enemigo3 = Enemigo("Troll")
-enemigo3.atacar(personaje3)
+enemigo = Enemigo("Orco")
+enemigo.atacar(personaje)
