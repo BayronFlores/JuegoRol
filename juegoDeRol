@@ -1,19 +1,19 @@
 import random
 
-class Personaje: #constructor 
+class Personaje:  #constructor 
     def __init__(self, name):
         self.name = name
 
     def atacar(self):
-        raise NotImplementedError() #indica que la clase derivada no implementa intencionalmente un método abstracto de clase
+        raise NotImplementedError()   #indica que la clase derivada no implementa intencionalmente un método abstracto de clase
 
     def defender(self):
-        raise NotImplementedError()#indica que la clase derivada no implementa intencionalmente un método abstracto de clase
+        raise NotImplementedError()   #indica que la clase derivada no implementa intencionalmente un método abstracto de clase
 
     def ataqueAcerto(self):
-        return random.random() < 0.5 #genera un número aleatorio y devuelve True si el número es menor que 0.5.
+        return random.random() < 0.5  #genera un número aleatorio y devuelve True si el número es menor que 0.5.
 "-----------------------------------------------------------------------------------------------------------------"
-class Enemigo: #constructor 
+class Enemigo:  #constructor 
     def __init__(self, name):
         self.name = name
 
@@ -24,9 +24,9 @@ class Enemigo: #constructor
             print(f"{self.name} ataca a {personaje.name} y logra hacerle daño.")
 
     def defender(self):
-        return random.random() < 0.5 #genera un número aleatorio y devuelve True si el número es menor que 0.5.
+        return random.random() < 0.5  #genera un número aleatorio y devuelve True si el número es menor que 0.5.
 "-----------------------------------------------------------------------------------------------------------------"
-class Guerrero(Personaje): #se heredan los atributos de "Personaje"
+class Guerrero(Personaje):  #se heredan los atributos de "Personaje"
     def atacar(self):
         if self.ataqueAcerto():
             print(f"{self.name} realiza un ataque con su espada y acierta.")
@@ -41,7 +41,7 @@ class Guerrero(Personaje): #se heredan los atributos de "Personaje"
             print(f"{self.name} no logra bloquear el ataque y recibe daño.")
             return False
 "-----------------------------------------------------------------------------------------------------------------"
-class Arquero(Personaje): #se heredan los atributos de "Personaje"
+class Arquero(Personaje):  #se heredan los atributos de "Personaje"
     def atacar(self):
         if self.ataqueAcerto():
             print(f"{self.name} dispara una flecha hacia su enemigo y acierta.")
@@ -56,7 +56,7 @@ class Arquero(Personaje): #se heredan los atributos de "Personaje"
             print(f"{self.name} no logra bloquear el ataque y recibe daño.")
             return False
 "-----------------------------------------------------------------------------------------------------------------"
-class Mago(Personaje): #se heredan los atributos de "Personaje"
+class Mago(Personaje):  #se heredan los atributos de "Personaje"
     def atacar(self):
         if self.ataqueAcerto():
             print(f"{self.name} lanza una bola de fuego a su enemigo y acierta.")
