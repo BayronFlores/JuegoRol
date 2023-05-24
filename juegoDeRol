@@ -1,19 +1,19 @@
 import random
 
-class Personaje:
+class Personaje: #constructor 
     def __init__(self, nombre):
         self.nombre = nombre
 
     def atacar(self):
-        raise NotImplementedError()
+        raise NotImplementedError() #indica que la clase derivada no implementa intencionalmente un método abstracto de clase
 
     def defender(self):
-        raise NotImplementedError()
+        raise NotImplementedError()#indica que la clase derivada no implementa intencionalmente un método abstracto de clase
 
     def ataqueAcerto(self):
         return random.random() < 0.5 #genera un número aleatorio y devuelve True si el número es menor que 0.5.
 "-----------------------------------------------------------------------------------------------------------------"
-class Enemigo:
+class Enemigo: #constructor 
     def __init__(self, nombre):
         self.nombre = nombre
 
@@ -26,7 +26,7 @@ class Enemigo:
     def defender(self):
         return random.random() < 0.5 #genera un número aleatorio y devuelve True si el número es menor que 0.5.
 "-----------------------------------------------------------------------------------------------------------------"
-class Guerrero(Personaje):
+class Guerrero(Personaje): #se heredan los atributos de "Personaje"
     def atacar(self):
         if self.ataqueAcerto():
             print(f"{self.nombre} realiza un ataque con su espada y acierta.")
@@ -41,22 +41,7 @@ class Guerrero(Personaje):
             print(f"{self.nombre} no logra bloquear el ataque y recibe daño.")
             return False
 "-----------------------------------------------------------------------------------------------------------------"
-class Mago(Personaje):
-    def atacar(self):
-        if self.ataqueAcerto():
-            print(f"{self.nombre} lanza una bola de fuego a su enemigo y acierta.")
-        else:
-            print(f"{self.nombre} lanza una bola de fuego a su enemigo, pero falla.")
-
-    def defender(self):
-        if self.ataqueAcerto():
-            print(f"{self.nombre} crea un escudo mágico para protegerse.")
-            return True
-        else:
-            print(f"{self.nombre} no logra bloquear el ataque y recibe daño.")
-            return False
-"-----------------------------------------------------------------------------------------------------------------"
-class Arquero(Personaje):
+class Arquero(Personaje): #se heredan los atributos de "Personaje"
     def atacar(self):
         if self.ataqueAcerto():
             print(f"{self.nombre} dispara una flecha hacia su enemigo y acierta.")
@@ -71,29 +56,53 @@ class Arquero(Personaje):
             print(f"{self.nombre} no logra bloquear el ataque y recibe daño.")
             return False
 "-----------------------------------------------------------------------------------------------------------------"
+class Mago(Personaje): #se heredan los atributos de "Personaje"
+    def atacar(self):
+        if self.ataqueAcerto():
+            print(f"{self.nombre} lanza una bola de fuego a su enemigo y acierta.")
+        else:
+            print(f"{self.nombre} lanza una bola de fuego a su enemigo, pero falla.")
+
+    def defender(self):
+        if self.ataqueAcerto():
+            print(f"{self.nombre} crea un escudo mágico para protegerse.")
+            return True
+        else:
+            print(f"{self.nombre} no logra bloquear el ataque y recibe daño.")
+            return False
+"-----------------------------------------------------------------------------------------------------------------"
+
 class CrearPersonajes:
     def crear_personaje(self, tipo, nombre):
         if tipo == "guerrero":
             return Guerrero(nombre)
-        elif tipo == "mago":
-            return Mago(nombre)
         elif tipo == "arquero":
             return Arquero(nombre)
+        elif tipo == "mago":
+            return Mago(nombre)
         else:
             raise ValueError(f"Tipo de personaje desconocido: {tipo}")
 "-----------------------------------------------------------------------------------------------------------------"
 creador = CrearPersonajes()
 
-tipo_personaje = ""
-while tipo_personaje not in ["guerrero", "mago", "arquero"]: #solicitar la entrada hasta que se proporcione un valor válido
-    tipo_personaje = input("Selecciona el tipo de personaje (guerrero, mago, arquero): ")
+continuar_juego = True
+while continuar_juego:
+    tipo_personaje = ""
+    while tipo_personaje not in ["guerrero", "mago", "arquero"]:
+        tipo_personaje = input("Selecciona el tipo de personaje (guerrero, mago, arquero): ")
+        if tipo_personaje not in ["guerrero", "mago", "arquero"]:
+            print(f"Tipo de personaje desconocido: {tipo_personaje}")
 
-nombre_personaje = input("Ingresa el nombre del personaje: ")
+    nombre_personaje = input("Ingresa el nombre del personaje: ")
 
+    print("-------------------------------------------")
 
+    personaje = creador.crear_personaje(tipo_personaje, nombre_personaje)
+    personaje.atacar()
 
-personaje = creador.crear_personaje(tipo_personaje, nombre_personaje)
-personaje.atacar()
+    enemigo = Enemigo("Orco")
+    enemigo.atacar(personaje)
 
-enemigo = Enemigo("Orco")
-enemigo.atacar(personaje)
+    respuesta = input("¿Deseas utilizar otro personaje? (s/n): ")
+    if respuesta.lower() != "s":
+        continuar_juego = False
