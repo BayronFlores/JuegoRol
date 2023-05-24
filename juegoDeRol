@@ -108,3 +108,13 @@ while continuarJuego:
     respuesta = input("¿Deseas utilizar otro personaje? (s/n): ")
     if respuesta.lower() != "s":
         continuarJuego = False
+
+
+""" resultado por consola:
+Selecciona el tipo de personaje (guerrero, mago, arquero): guerrero
+Ingresa el nombre del personaje: Aragorn
+-------------------------------------------
+Aragorn realiza un ataque con su espada y acierta.
+Aragorn bloquea el ataque con su escudo.
+Orco ataca a Aragorn, pero Aragorn se defiende exitosamente.
+-------------------------------------------"""
