@@ -1,0 +1,53 @@
+class User:
+    def __init__(self, name):
+        self.name = name
+
+    def greet(self):
+        pass
+"-----------------------------------------------------------------------------------------------------------------"
+class NormalUser(User):
+    def greet(self):
+        print(f"Hola, soy un usuario normal llamado {self.name}")
+"-----------------------------------------------------------------------------------------------------------------"
+class PremiumUser(User):
+    def greet(self):
+        print(f"Hola, soy un usuario premium llamado {self.name}")
+"-----------------------------------------------------------------------------------------------------------------"
+class AdminUser(User):
+    def greet(self):
+        print(f"Hola, soy un usuario administrador llamado {self.name}")
+"-----------------------------------------------------------------------------------------------------------------"
+class UserFactory:
+    def createUser(self, user_type, name):
+        if user_type == "normal":
+            return NormalUser(name)
+        elif user_type == "premium":
+            return PremiumUser(name)
+        elif user_type == "admin":
+            return AdminUser(name)
+        else:
+            raise ValueError("Tipo de usuario no válido")
+"-----------------------------------------------------------------------------------------------------------------"
+factory = UserFactory()
+
+continuar = True
+while continuar:
+    tipo_user = ""
+    while tipo_user not in ["normal", "premium", "admin"]:
+        tipo_user = input("Selecciona el tipo de usuario (normal, premium, admin): ")
+        if tipo_user not in ["normal", "premium", "admin"]:
+            print(f"Tipo de usuario desconocido: {tipo_user}")
+
+    nombreUser = input("Ingresa el nombre del personaje: ")
+
+    print("-------------------------------------------")
+
+    user = factory.createUser(tipo_user, nombreUser)
+    user.greet() #Salida: Hola, soy un usuario " " llamado " "
+
+    print("-------------------------------------------")
+
+    respuesta = input("¿Deseas ingresar con otro usuario? (s/n): ")
+    if respuesta.lower() != "s":
+        continuar = False
+
