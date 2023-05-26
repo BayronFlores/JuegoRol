@@ -38,7 +38,7 @@ while continuar:
         if tipo_user not in ["normal", "premium", "admin"]:
             print(f"Tipo de usuario desconocido: {tipo_user}")
 
-    nombreUser = input("Ingresa el nombre del personaje: ")
+    nombreUser = input("Ingrese su nombre: ")
 
     print("-------------------------------------------")
 
